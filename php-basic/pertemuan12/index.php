@@ -3,6 +3,13 @@ require 'functions.php';
 
 // menampilkan data yang baru di bagian paling atas
 $movies = query("SELECT * FROM movie ORDER BY id DESC");
+
+// jika tombol cari diklik, timpa query sesuai dengan pencariannya
+if( isset($_POST["search"]) ) {
+
+    $movies = search($_POST["keyword"]);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +23,14 @@ $movies = query("SELECT * FROM movie ORDER BY id DESC");
 <body>
     <h1>Movie List 2021</h1>
     <a href="insert.php">Insert Movie</a><br><br>
+
+    <!-- Searching -->
+    <form action="" method="POST">
+        <input type="text" name="keyword" size="40" autofocus placeholder="Search something..." autocomplete="off">
+        <button type="submit" name="search">Search</button><br><br>
+    </form>
+
+    <!-- Movie list -->
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No</th>
