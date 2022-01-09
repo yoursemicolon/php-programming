@@ -1,0 +1,7 @@
+- how to delete image from database and folder php
+- rollback uploaded image to database in php
+- show time value in php from database
+
+
+
+
