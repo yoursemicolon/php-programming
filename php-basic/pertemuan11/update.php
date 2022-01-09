@@ -50,7 +50,9 @@ if( isset($_POST["submit"]) ) {
         <ul>
             <li>
                 <label for="poster"></label>
-                <input type="file" name="poster" id="poster" value=""><br><br>
+                <img src="img/<?= $movie["poster"]; ?>" alt="<?= $movie["title"]; ?>" width="200px"><br>
+                <input type="file" name="poster" id="poster" value="<?= $movie["poster"]; ?>">
+                <br><br>
             </li>
             <li>
                 <label for="title">Title : </label>
@@ -62,7 +64,7 @@ if( isset($_POST["submit"]) ) {
             </li>
             <li>
                 <label for="date">Release Date : </label>
-                <input type="text" name="date" id="date" value="<?= $movie["release_date"]; ?>"><br><br>
+                <input type="date" name="date" id="date" value="<?= date('Y-m-d', strtotime($movie["release_date"])); ?>"><br><br>
             </li>
             <li>
                 <label for="production">Production : </label>
@@ -73,8 +75,9 @@ if( isset($_POST["submit"]) ) {
                 <input type="text" name="lang" id="lang" value="<?= $movie["lang"]; ?>"><br><br>
             </li>
             <li>
-                <button type="submit" name="submit">Ubah Data</button>
+                <button type="submit" name="submit">Change Data</button><br><br>
             </li>
+            <a href="index.php">Back</a>
     </form>
 </body>
 </html>
