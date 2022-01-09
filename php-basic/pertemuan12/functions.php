@@ -101,4 +101,18 @@ function update($data, $id) {
     return mysqli_affected_rows($conn);
 }
 
+function search($keyword) {
+    global $conn;
+    $query = "SELECT * FROM movie
+                WHERE 
+                title LIKE '%$keyword%' OR
+                cast LIKE '%$keyword%' OR
+                release_date LIKE '%$keyword%' OR
+                production LIKE '%$keyword%' OR
+                lang LIKE '%$keyword%'
+            ";
+
+    return query($query);
+}
+
 ?>
