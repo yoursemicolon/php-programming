@@ -43,12 +43,6 @@ if( isset($_POST["submit"]) ) {
     <title>Update Movie</title>
 </head>
 
-<?php if(isset($error)) : ?>
-    <p style="color: red; font-style: italic;">
-        Poster or Title must be filled!
-    </p>
-<?php endif; ?>
-
 <body>
     <h1>Update Movie</h1>
     <form action="" method="POST" enctype="multipart/form-data">
@@ -56,7 +50,7 @@ if( isset($_POST["submit"]) ) {
         <ul>
             <li>
                 <label for="poster"></label>
-                <input type="file" name="poster" id="poster" value="<?= $movie["poster"]; ?>"><br><br>
+                <input type="file" name="poster" id="poster" value=""><br><br>
             </li>
             <li>
                 <label for="title">Title : </label>
@@ -68,7 +62,7 @@ if( isset($_POST["submit"]) ) {
             </li>
             <li>
                 <label for="date">Release Date : </label>
-                <input type="date" name="date" id="date" value="<?= strftime('%d/%m/%Y', strtotime($movie["release_date"])); ?>"><br><br>
+                <input type="text" name="date" id="date" value="<?= $movie["release_date"]; ?>"><br><br>
             </li>
             <li>
                 <label for="production">Production : </label>

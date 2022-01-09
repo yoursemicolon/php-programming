@@ -34,11 +34,11 @@ if( isset($_POST["submit"]) ) {
     <title>Insert Movie</title>
 </head>
 
-<?php if(isset($error)) : ?>
+<!-- <?php if(isset($error)) : ?>
     <p style="color: red; font-style: italic;">
         Poster or Title must be filled!
     </p>
-<?php endif; ?>
+<?php endif; ?> -->
 
 <body>
     <h1>Insert Movie</h1>
