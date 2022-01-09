@@ -65,12 +65,14 @@ function update($data, $id) {
     $production = htmlspecialchars($data["production"]); 
     $lang = htmlspecialchars($data["lang"]); 
 
+    // echo $id;
+
     // panggil fungsi query insert data
     $query = "UPDATE movie SET
                 poster = '$poster',
                 title = '$title',
                 cast = '$cast',
-                release_date = $date,
+                release_date = '$date',
                 production = '$production', 
                 lang = '$lang'
                 WHERE id = $id
