@@ -67,22 +67,36 @@ function update($data, $id) {
 
     // echo $id;
 
-    // panggil fungsi query insert data
-    $query = "UPDATE movie SET
-                poster = '$poster',
-                title = '$title',
-                cast = '$cast',
-                release_date = '$date',
-                production = '$production', 
-                lang = '$lang'
-                WHERE id = $id
-                ";
+
+    if( $tmp_poster != "" ) {
+        // move upload image to the folder: img
+        move_uploaded_file($tmp_poster, $folder);
+
+        // query update data
+        $query = "UPDATE movie SET
+                    poster = '$poster',
+                    title = '$title',
+                    cast = '$cast',
+                    release_date = '$date',
+                    production = '$production', 
+                    lang = '$lang'
+                    WHERE id = $id
+                    ";
+    } else {
+        // query update data
+        $query = "UPDATE movie SET
+                    title = '$title',
+                    cast = '$cast',
+                    release_date = '$date',
+                    production = '$production', 
+                    lang = '$lang'
+                    WHERE id = $id
+                    ";
+    }
 
     // execute query
     mysqli_query($conn, $query);
     
-    // move upload image to the folder: img
-    move_uploaded_file($tmp_poster, $folder);
 
     return mysqli_affected_rows($conn);
 }
