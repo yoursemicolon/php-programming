@@ -36,9 +36,6 @@ function insert($data) {
     // execute query
     mysqli_query($conn, $query);
     
-    // move upload image to the folder: img
-    // move_uploaded_file($tmp_poster, $folder);
-
     return mysqli_affected_rows($conn);
 }
 
