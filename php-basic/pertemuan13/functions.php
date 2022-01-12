@@ -16,12 +16,6 @@ function query($query) {
 function insert($data) {
     global $conn;
 
-    // ambil data dari tiap elemen form
-    // upload file
-    $poster = $_FILES["poster"]["name"];
-    $tmp_poster = $_FILES["poster"]["tmp_name"];
-    $folder = "img/".$poster;
-
     // ambil data lain
     $title = htmlspecialchars($data["title"]);
     $cast = htmlspecialchars($data["cast"]);
@@ -33,6 +27,9 @@ function insert($data) {
     $query = "INSERT INTO movie
                 VALUES('', '$poster', '$title', '$cast', '$date', '$production', '$lang')";
 
+    // upload file 
+    $image = 
+
     // execute query
     mysqli_query($conn, $query);
     
@@ -40,6 +37,29 @@ function insert($data) {
     move_uploaded_file($tmp_poster, $folder);
 
     return mysqli_affected_rows($conn);
+}
+
+function upload() {
+    // ambil data dari $_FILES
+    $poster = $_FILES["poster"]["name"];
+    $poster_size = $_FILES["poster"]["size"];
+    $poster_error = $_FILES["poster"]["error"]
+    $tmp_poster = $_FILES["poster"]["tmp_name"];
+    $folder = "img/".$poster;
+
+    // cek apakah ada gambar yang diupload
+    if( $poster_error === 4 ) {
+        echo "<script>
+                alert("Pilih gambar terlebih dahulu!");
+            </script>";
+        return false;
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $validExtension = ['jpg', 'jpeg', 'png'];
+    $posterExtension = explode('.', $poster);
+    $posterExtension = end($posterExtension); // mengambil yang paling akhir
+    
 }
 
 function delete($id) {
@@ -109,7 +129,7 @@ function search($keyword) {
                 cast LIKE '%$keyword%' OR
                 release_date LIKE '%$keyword%' OR
                 production LIKE '%$keyword%' OR
-                lang LIKE '%$keyword%' 
+                lang LIKE '%$keyword%'
             ";
 
     return query($query);
