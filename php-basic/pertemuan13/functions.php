@@ -57,8 +57,12 @@ function upload() {
 
     // cek apakah yang diupload adalah gambar
     $validExtension = ['jpg', 'jpeg', 'png'];
-    $posterExtension = explode('.', $poster);
-    $posterExtension = strtolower(end($posterExtension)); // mengambil yang paling akhir dan ubah jadi huruf kecil
+    // $posterExtension = explode('.', $poster);
+    // $posterExtension = strtolower(end($posterExtension)); // mengambil yang paling akhir dan ubah jadi huruf kecil
+
+    // get file extension with pathinfo()
+    $posterExtension = pathinfo($poster, PATHINFO_EXTENSION);
+    $posterExtension = strtolower($posterExtension);
 
     // cek ekstensi file
     // in_array(needle, haystack)
