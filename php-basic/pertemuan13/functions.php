@@ -45,7 +45,7 @@ function upload() {
     $poster_size = $_FILES["poster"]["size"];
     $poster_error = $_FILES["poster"]["error"];
     $tmp_poster = $_FILES["poster"]["tmp_name"];
-    $folder = "img/".$poster;
+    // $folder = "img/".$poster;
 
     // cek apakah ada gambar yang diupload
     if( $poster_error === 4 ) {
@@ -77,11 +77,15 @@ function upload() {
         return false;
     }
 
+    // rename file
+    $newFileName = md5(rand()) . '.' . $posterExtension;
+    $path = "img/" . $newFileName;
+    
     // gambar siap diupload
-    move_uploaded_file($tmp_poster, $folder);
+    move_uploaded_file($tmp_poster, $path);
 
     // kembalikan nama file untuk dimasukkan ke dalam database
-    return $poster;
+    return $newFileName;
 
 }
 
