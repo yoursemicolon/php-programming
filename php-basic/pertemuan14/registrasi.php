@@ -34,16 +34,16 @@ if( isset($_POST["register"]) ) {
                 <label for="username">Username : </label>
                 <input type="text" name="username" id="username">
             </li>
-            <!-- <li>
+            <li>
                 <label for="email">Email : </label>
                 <input type="email" name="email" id="email">
-            </li> -->
+            </li>
             <li>
                 <label for="password">Password : </label>
                 <input type="password" name="password" id="password">
             <li>
                 <label for="password">Confirm Password : </label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password2" id="password">
             </li>
             <li>
                 <button type="submit" name="register">Register</button>
