@@ -46,12 +46,12 @@ if( isset($_POST["submit"]) ) {
 <body>
     <h1>Update Movie</h1>
     <form action="" method="POST" enctype="multipart/form-data">
-        <!-- <input type="hidden" name="id" value="<?= $movie["id"]; ?>"> -->
+        <input type="hidden" name="oldPoster" value="<?= $movie["poster"]; ?>">
         <ul>
             <li>
-                <label for="poster"></label>
+                <label for="poster">Poster : </label> <br>
                 <img src="img/<?= $movie["poster"]; ?>" alt="<?= $movie["title"]; ?>" width="200px"><br>
-                <input type="file" name="poster" id="poster" value="<?= $movie["poster"]; ?>">
+                <input type="file" name="poster" id="poster">
                 <br><br>
             </li>
             <li>
