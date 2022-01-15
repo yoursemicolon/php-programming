@@ -103,52 +103,34 @@ function update($data, $id) {
     global $conn;
 
     // ambil data dari tiap elemen form
-    // upload file
-    $poster = $_FILES["poster"]["name"];
-    $tmp_poster = $_FILES["poster"]["tmp_name"];
-    $folder = "img/".$poster;
-
-    // ambil data lain
-    // $id = $data["id"];
     $title = htmlspecialchars($data["title"]);
     $cast = htmlspecialchars($data["cast"]);
     $date = htmlspecialchars($data["date"]);
     $production = htmlspecialchars($data["production"]); 
-    $lang = htmlspecialchars($data["lang"]); 
+    $lang = htmlspecialchars($data["lang"]);
+    $oldPoster = htmlspecialchars($data["oldPoster"]);
 
-    // echo $id;
-
-
-    if( $tmp_poster != "" ) {
-        // move upload image to the folder: img
-        move_uploaded_file($tmp_poster, $folder);
-
-        // query update data
-        $query = "UPDATE movie SET
-                    poster = '$poster',
-                    title = '$title',
-                    cast = '$cast',
-                    release_date = '$date',
-                    production = '$production', 
-                    lang = '$lang'
-                    WHERE id = $id
-                    ";
-    } else {
-        // query update data
-        $query = "UPDATE movie SET
-                    title = '$title',
-                    cast = '$cast',
-                    release_date = '$date',
-                    production = '$production', 
-                    lang = '$lang'
-                    WHERE id = $id
-                    ";
+    // cek apakah user pilih gambar baru atau tidak
+    if( $_FILES["poster"]["error"] === 4 ) { // error = 4, tidak ada gambar yang dipilih
+        $poster = $oldPoster;
+    } else if( $_FILES["poster"]["error"] === 0 ) { // gambar diupload
+        $poster = upload();
     }
+
+    // query update data
+    $query = "UPDATE movie SET
+                poster = '$poster',
+                title = '$title',
+                cast = '$cast',
+                release_date = '$date',
+                production = '$production', 
+                lang = '$lang'
+                WHERE id = $id
+                ";
 
     // execute query
     mysqli_query($conn, $query);
     
-
     return mysqli_affected_rows($conn);
 }
 
