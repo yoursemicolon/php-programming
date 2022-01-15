@@ -148,4 +148,16 @@ function search($keyword) {
     return query($query);
 }
 
+function register($data) {
+    global $conn;
+
+    // ambil data yang dikirimkan
+    $username = $data["username"];
+    $email = $data["email"];
+    $password = $data["password"];
+    $passwordConfirmation = $data["password2"];
+
+    
+}
+
 ?>
