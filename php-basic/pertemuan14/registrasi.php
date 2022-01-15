@@ -1,3 +1,18 @@
+<?php 
+require 'functions.php';
+
+if( isset($_POST["register"]) ) {
+    if( register($_POST) > 0 ) {
+        echo "<script>
+                alert('User berhasil ditambahkan!');
+            </script>";
+    } else {
+        echo mysqli_error($conn);
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,22 +20,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrasi</title>
+    <style>
+        label {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <h1>Registrasi</h1>
     <form action="" method="POST">
         <ul>
             <li>
-                <label for="username"></label>
+                <label for="username">Username : </label>
                 <input type="text" name="username" id="username">
             </li>
+            <!-- <li>
+                <label for="email">Email : </label>
+                <input type="email" name="email" id="email">
+            </li> -->
             <li>
-                <label for="email"></label>
-                <input type="text" name="" id="">
+                <label for="password">Password : </label>
+                <input type="password" name="password" id="password">
+            <li>
+                <label for="password">Confirm Password : </label>
+                <input type="password" name="password" id="password">
             </li>
             <li>
-                <label for="password"></label>
-                <input type="text" name="" id="">
+                <button type="submit" name="register">Register</button>
             </li>
         </ul>
     </form>
