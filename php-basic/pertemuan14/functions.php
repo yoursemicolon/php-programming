@@ -178,7 +178,7 @@ function register($data) {
     // check password confirmation
     if( $password !== $passwordConfirmation) {
         echo "<script>
-                alert('Password tidak sesuai!');    
+                alert('Password doesn't match!');    
             </script>";
         return false;
     }
