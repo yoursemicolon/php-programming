@@ -152,12 +152,43 @@ function register($data) {
     global $conn;
 
     // ambil data yang dikirimkan
-    $username = $data["username"];
+    $username = strtolower(stripslashes($data["username"]));
     $email = $data["email"];
-    $password = $data["password"];
-    $passwordConfirmation = $data["password2"];
+    $password = mysqli_real_escape_string($conn, $data["password"]);
+    $passwordConfirmation = mysqli_real_escape_string($conn, $data["password2"]);
 
-    
+    // check whether username or email is already exist
+    $checkUsername = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+    $checkEmail = mysqli_query($conn, "SELECT email FROM users WHERE email = '$email'");
+
+    if( mysqli_fetch_assoc($checkUsername) ) {
+        echo "<script>
+                alert('Username already exist!');
+            </script>";
+        return false;
+    }
+
+    if( mysqli_fetch_assoc($checkEmail) ) {
+        echo "<script>
+                alert('Email already registered!');
+            </script>";
+        return false;
+    }
+
+    // check password confirmation
+    if( $password !== $passwordConfirmation) {
+        echo "<script>
+                alert('Password tidak sesuai!');    
+            </script>";
+        return false;
+    }
+
+    // password encryption
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    // insert new user to database
+    mysqli_query($conn, "INSERT INTO users VALUES('', '$username', '$email', '$password');");
+    return mysqli_affected_rows($conn);
 }
 
 ?>
